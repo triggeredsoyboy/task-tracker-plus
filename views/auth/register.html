@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{template "general/header"}}
+  </head>
+  <body>
+    <div class="grid h-screen lg:grid-cols-2">
+      <!-- left side -->
+      <div class="hidden lg:block">
+        <img
+          src="../../assets/img/picture-2.jpg"
+          alt="Picture 1"
+          class="h-screen w-auto object-cover"
+        />
+      </div>
+      <!-- end of left side -->
+
+      <!-- right side -->
+      <div class="flex flex-col justify-center px-6">
+        <!-- back button -->
+        <div class="mx-auto w-full lg:max-w-sm">
+          <a
+            href="/"
+            class="flex max-w-fit items-center gap-x-2.5 font-poppins font-medium leading-6 text-primary hover:text-secondary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-5 w-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+            Beranda
+          </a>
+        </div>
+        <!-- end of back button -->
+
+        <!-- greetings -->
+        <div class="mx-auto mt-10 w-full lg:max-w-sm">
+          <img
+            class="h-10 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Task Tracker Plus"
+          />
+          <h2 class="mt-10 font-poppins text-2xl font-bold leading-9 text-dark">
+            Halo,
+          </h2>
+          <p class="mt-2 font-poppins leading-6 text-light">
+            senang berkenalan denganmu.
+          </p>
+        </div>
+        <!-- end of greetings -->
+
+        <!-- register form -->
+        <div class="mx-auto mt-10 w-full lg:max-w-sm">
+          <form
+            action="/client/register/process"
+            method="POST"
+            class="space-y-6"
+          >
+            <!-- alert -->
+            {{if eq .status "error"}}
+            <div class="mx-auto mt-2 w-full lg:max-w-sm">
+              <div
+                class="rounded-lg border border-red-200 bg-red-100 p-4 font-poppins text-sm text-red-800"
+                role="alert"
+              >
+                <span class="font-poppins font-bold">Ups!</span> {{.message}}
+              </div>
+            </div>
+            {{end}}
+            <!-- end of alert -->
+
+            <div>
+              <label
+                for="fullname"
+                class="block font-poppins text-sm font-medium leading-6 text-light"
+                >Nama lengkap</label
+              >
+              <div class="mt-2">
+                <input
+                  id="fullname"
+                  name="fullname"
+                  type="text"
+                  required
+                  class="block w-full rounded-md border-0 py-1.5 font-poppins text-sm text-light shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-light focus:ring-2 focus:ring-inset focus:ring-primary"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="email"
+                class="block font-poppins text-sm font-medium leading-6 text-light"
+                >Alamat email</label
+              >
+              <div class="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  class="block w-full rounded-md border-0 py-1.5 font-poppins text-sm text-light shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-light focus:ring-2 focus:ring-inset focus:ring-primary"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="password"
+                class="block font-poppins text-sm font-medium leading-6 text-light"
+                >Kata sandi</label
+              >
+              <div class="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  class="block w-full rounded-md border-0 py-1.5 font-poppins text-sm text-light shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-light focus:ring-2 focus:ring-inset focus:ring-primary"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                class="flex w-full justify-center rounded-md bg-primary py-1.5 font-poppins text-sm font-semibold tracking-wide text-white shadow-sm hover:bg-secondary lg:text-base"
+              >
+                Daftar
+              </button>
+            </div>
+          </form>
+
+          <p class="mt-10 font-poppins leading-6 text-light">
+            Sudah punya akun?
+            <a
+              href="/client/login"
+              class="font-poppins font-medium leading-6 text-primary hover:text-secondary"
+              >Masuk</a
+            >
+          </p>
+        </div>
+        <!-- end of register form -->
+      </div>
+      <!-- end of right side -->
+    </div>
+  </body>
+</html>
