@@ -40,33 +40,11 @@
           </div>
           <!-- end of sidebar toggle -->
 
-          <!-- search bar -->
-          <div class="relative">
-            <div
-              class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-4 w-4 text-light"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              class="block w-full rounded-md border-0 py-1.5 pl-11 font-poppins text-sm text-light shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-light focus:ring-2 focus:ring-inset focus:ring-primary"
-              placeholder="Cari..."
-            />
-          </div>
-          <!-- search bar -->
+          <!-- page title -->
+          <p class="font-poppins text-xl font-semibold tracking-wide text-dark">
+            Kategori
+          </p>
+          <!-- end of page title -->
 
           <!-- profile dropdown -->
           <div class="hs-dropdown relative [--placement:bottom-right]">
@@ -103,22 +81,6 @@
                   {{.fullname}}
                 </p>
               </div>
-              <a
-                href="#"
-                class="block px-4 py-2 font-poppins text-sm text-dark hover:bg-gray-100"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-0"
-                >Profil</a
-              >
-              <a
-                href="#"
-                class="block px-4 py-2 font-poppins text-sm text-dark hover:bg-gray-100"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-1"
-                >Pengaturan</a
-              >
               <a
                 href="/client/logout"
                 class="-mb-1 block rounded-b-md px-4 py-2 font-poppins text-sm text-dark hover:bg-gray-100"
@@ -226,126 +188,138 @@
     </aside>
     <!-- end of sidebar -->
 
+    <!-- alert -->
+    {{if eq .status "success"}}
+    <div
+      id="dismiss-alert"
+      class="fixed left-1/2 top-10 z-[60] w-full max-w-sm -translate-x-1/2 rounded-lg border border-teal-200 bg-teal-50 p-4 text-sm text-teal-800 transition duration-300 hs-removing:translate-y-5 hs-removing:opacity-0"
+      role="alert"
+    >
+      <div class="flex items-center gap-x-2">
+        <div class="flex-shrink-0 text-teal-800">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+
+        <p class="font-poppins text-sm font-medium">Gagal</p>
+
+        <div class="ms-auto ps-3">
+          <div class="-mx-1.5 -my-1.5">
+            <button
+              type="button"
+              class="inline-flex rounded-lg bg-teal-50 p-1.5 text-teal-500 hover:bg-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2 focus:ring-offset-teal-50"
+              data-hs-remove-element="#dismiss-alert"
+            >
+              <span class="sr-only">Dismiss</span>
+              <svg
+                class="h-4 w-4 flex-shrink-0"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{else if eq .status "error"}}
+    <div
+      id="dismiss-alert"
+      class="fixed left-1/2 top-10 z-[60] w-full max-w-sm -translate-x-1/2 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800 transition duration-300 hs-removing:translate-y-5 hs-removing:opacity-0"
+      role="alert"
+    >
+      <div class="flex items-center gap-x-2">
+        <div class="flex-shrink-0 text-red-800">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+
+        <p class="font-poppins text-sm font-medium">Gagal</p>
+
+        <div class="ms-auto ps-3">
+          <div class="-mx-1.5 -my-1.5">
+            <button
+              type="button"
+              class="inline-flex rounded-lg bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
+              data-hs-remove-element="#dismiss-alert"
+            >
+              <span class="sr-only">Dismiss</span>
+              <svg
+                class="h-4 w-4 flex-shrink-0"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{end}}
+    <!-- end of alert -->
+
     <!-- main content -->
     <main class="my-6 lg:ml-64">
-      {{if eq .status "success"}}
-      <!-- alert -->
-      <div
-        id="dismiss-alert"
-        class="fixed left-1/2 top-6 z-[60] w-full max-w-sm -translate-x-1/2 rounded-lg border border-teal-200 bg-teal-50 p-4 text-sm text-teal-800 transition duration-300 hs-removing:translate-x-5 hs-removing:opacity-0 md:-translate-x-0"
-        role="alert"
-      >
-        <div class="flex items-center gap-x-4">
-          <div class="flex-shrink-0 text-primary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="h-6 w-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-
-          <div class="ms-2">
-            <div class="font-poppins text-sm font-medium">{{.message}}</div>
-          </div>
-
-          <div class="ms-auto ps-3">
-            <div class="-mx-1.5 -my-1.5">
-              <button
-                type="button"
-                class="inline-flex rounded-lg bg-teal-50 p-1.5 text-teal-500 hover:bg-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2 focus:ring-offset-teal-50"
-                data-hs-remove-element="#dismiss-alert"
-              >
-                <span class="sr-only">Dismiss</span>
-                <svg
-                  class="h-4 w-4 flex-shrink-0"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end of alert -->
-      {{else if eq .status "error"}}
-      <div
-        id="dismiss-alert"
-        class="fixed left-1/2 top-6 z-[60] w-full max-w-sm -translate-x-1/2 rounded-lg border border-teal-200 bg-teal-50 p-4 text-sm text-teal-800 transition duration-300 hs-removing:translate-x-5 hs-removing:opacity-0 md:-translate-x-0"
-        role="alert"
-      >
-        <div class="flex items-center gap-x-4">
-          <div class="flex-shrink-0 text-primary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="h-6 w-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-
-          <div class="ms-2">
-            <div class="font-poppins text-sm font-medium">{{.message}}</div>
-          </div>
-
-          <div class="ms-auto ps-3">
-            <div class="-mx-1.5 -my-1.5">
-              <button
-                type="button"
-                class="inline-flex rounded-lg bg-teal-50 p-1.5 text-teal-500 hover:bg-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2 focus:ring-offset-teal-50"
-                data-hs-remove-element="#dismiss-alert"
-              >
-                <span class="sr-only">Dismiss</span>
-                <svg
-                  class="h-4 w-4 flex-shrink-0"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {{end}}
-
       <div class="container">
         <div class="flex rounded-lg border bg-white p-4 shadow-sm">
+          <!-- empty state -->
+          {{if eq (len .user_categories) 0}}
+          <div
+            class="flex h-48 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-tertiary bg-white p-4"
+          >
+            <p class="font-poppins text-light">Kamu belum memiliki kategori!</p>
+            <button
+              type="button"
+              class="font-poppins text-primary hover:text-secondary"
+              data-hs-overlay="#create-category"
+            >
+              Buat kategori baru
+            </button>
+          </div>
+          <!-- end of empty state -->
+          {{else}}
           <!-- user's categories list -->
           <div class="border-e border-gray-200 dark:border-gray-700">
             <nav
@@ -417,7 +391,7 @@
                   </h3>
                   <p class="font-poppins text-sm text-light">
                     Jumlah Tugas:
-                    <span class="font-poppins text-sm font-bold text-dark"
+                    <span class="font-poppins text-sm font-medium text-dark"
                       >{{len $val.Tasks}}</span
                     >
                   </p>
@@ -523,6 +497,18 @@
 
               <!-- tasks list -->
               <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <!-- empty state -->
+                {{if eq (len $val.Tasks) 0}}
+                <div
+                  class="flex h-48 w-full flex-col items-start justify-center rounded-lg border-2 border-dashed border-tertiary bg-white p-4 md:items-center"
+                >
+                  <p class="font-poppins text-light">
+                    Kamu belum memiliki tugas!
+                  </p>
+                </div>
+                {{end}}
+                <!-- end of empty state -->
+
                 {{range $index, $task := $val.Tasks}}
                 <a
                   href="/client/task/{{$task.ID}}"
@@ -566,7 +552,7 @@
                   </h3>
                   <p class="font-poppins text-sm text-light">
                     Jumlah Tugas:
-                    <span class="font-poppins text-sm font-bold text-dark"
+                    <span class="font-poppins text-sm font-medium text-dark"
                       >{{len $val.Tasks}}</span
                     >
                   </p>
@@ -672,6 +658,18 @@
 
               <!-- tasks list -->
               <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <!-- empty state -->
+                {{if eq (len $val.Tasks) 0}}
+                <div
+                  class="flex h-48 w-full flex-col items-start justify-center rounded-lg border-2 border-dashed border-tertiary bg-white p-4 md:items-center"
+                >
+                  <p class="font-poppins text-light">
+                    Kamu belum memiliki tugas!
+                  </p>
+                </div>
+                {{end}}
+                <!-- end of empty state -->
+
                 {{range $index, $task := $val.Tasks}}
                 <a
                   href="/client/task/{{$task.ID}}"
@@ -703,6 +701,7 @@
             {{end}} {{end}}
           </div>
           <!-- end of task list by category -->
+          {{end}}
         </div>
       </div>
     </main>

@@ -72,7 +72,7 @@ func (r *taskRepository) GetByID(id int) (*model.Task, error) {
 
 func (r *taskRepository) GetByCategory(id int) ([]model.TaskByCategory, error) {
 	var tasks []model.TaskByCategory
-	err := r.db.Table("tasks").Select("tasks.id, tasks.title, tasks.description, categories.name AS category, tasks.created_at, tasks.deadline, tasks.status, tasks.priority_id").Joins("LEFT JOIN categories ON tasks.category_id = categories.id AND tasks.user_id = ?", id).Where("tasks.deleted_at IS NULL").Scan(&tasks).Error
+	err := r.db.Table("tasks").Select("tasks.id, tasks.title, tasks.description, categories.name AS category, tasks.created_at, tasks.deadline, tasks.status, tasks.priority_id").Joins("LEFT JOIN categories ON tasks.category_id = categories.id").Where("tasks.deleted_at IS NULL").Where("tasks.user_id = ?", id).Scan(&tasks).Error
 	if err != nil {
 		return nil, err
 	}

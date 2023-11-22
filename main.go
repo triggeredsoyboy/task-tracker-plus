@@ -198,7 +198,7 @@ func RunClient(db *gorm.DB, gin *gin.Engine, embed embed.FS) *gin.Engine {
 		main.POST("/dashboard/task-add/process", client.DashboardWeb.TaskAddProcess)
 		main.POST("/dashboard/task-delete/process", client.DashboardWeb.TaskDeleteProcess)
 
-		main.GET("/task/", client.TaskWeb.TaskPage)
+		main.GET("/task", client.TaskWeb.TaskPage)
 		main.GET("/task/:id", client.TaskWeb.TaskByID)
 		main.POST("/task/task-update/:id/process", client.TaskWeb.TaskUpdateProcess)
 
