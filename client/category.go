@@ -55,7 +55,7 @@ func (c *categoryClient) CreateCategory(token string, category model.Category) (
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != 201 {
 		return -1, errors.New("create category failed")
 	}
 
@@ -131,7 +131,7 @@ func (c *categoryClient) UpdateCategory(token string, id int, category model.Cat
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return -1, errors.New("create category failed")
+		return -1, errors.New("update category failed")
 	}
 
 	return resp.StatusCode, nil

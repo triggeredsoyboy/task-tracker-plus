@@ -208,12 +208,12 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
         </div>
 
-        <p class="font-poppins text-sm font-medium">Gagal</p>
+        <p class="font-poppins text-sm font-medium">{{.message}}</p>
 
         <div class="ms-auto ps-3">
           <div class="-mx-1.5 -my-1.5">
@@ -267,7 +267,7 @@
           </svg>
         </div>
 
-        <p class="font-poppins text-sm font-medium">Gagal</p>
+        <p class="font-poppins text-sm font-medium">{{.message}}</p>
 
         <div class="ms-auto ps-3">
           <div class="-mx-1.5 -my-1.5">
@@ -544,7 +544,7 @@
                   class="result bg-red-100 hover:bg-red-200"
                   id="task{{$val.ID}}"
                 >
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px max-w-[1/7]">
                     <div class="px-6 py-3">
                       <span
                         class="taskTitle font-poppins font-medium text-dark hover:text-dark/80"
@@ -553,7 +553,7 @@
                       >
                     </div>
                   </td>
-                  <td class="h-px w-2/6 min-w-[15rem] lg:w-64">
+                  <td class="w-2/7 h-px min-w-[15rem] lg:w-64">
                     <div class="px-6 py-3">
                       <span
                         class="taskDescription line-clamp-3 font-poppins text-dark hover:text-dark/80 md:line-clamp-4"
@@ -563,7 +563,7 @@
                       </span>
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span
                         class="taskCategory font-poppins text-dark hover:text-dark/80"
@@ -572,28 +572,28 @@
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span class="font-poppins text-dark hover:text-dark/80"
                         >{{$val.CreatedAt | formatTime}}</span
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span class="font-poppins text-dark hover:text-dark/80"
                         >{{$val.Deadline | formatTime}}</span
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span class="font-poppins text-dark hover:text-dark/80"
                         >{{$val.Status}}</span
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <div class="flex items-center gap-x-3">
                         <a
@@ -601,24 +601,13 @@
                           class="font-poppins text-primary hover:text-primary/80"
                           >Edit</a
                         >
-                        <form
-                          action="/client/dashboard/task-delete/process"
-                          method="post"
-                          class="-mt-0.5"
+                        <button
+                          type="button"
+                          class="font-poppins text-red-500 hover:text-red-500/80"
+                          data-hs-overlay="#delete-task-{{$val.ID}}"
                         >
-                          <input
-                            type="text"
-                            name="id"
-                            value="{{$val.ID}}"
-                            hidden
-                          />
-                          <button
-                            type="submit"
-                            class="font-poppins text-red-500 hover:text-red-500/80"
-                          >
-                            Hapus
-                          </button>
-                        </form>
+                          Hapus
+                        </button>
                       </div>
                     </div>
                   </td>
@@ -626,7 +615,7 @@
                 {{else}}
                 <!-- didn't over the deadline task -->
                 <tr class="result hover:bg-slate-100" id="task{{$val.ID}}">
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px max-w-[1/7]">
                     <div class="px-6 py-3">
                       <span
                         class="taskTitle font-poppins font-medium text-dark hover:text-dark/80"
@@ -635,7 +624,7 @@
                       >
                     </div>
                   </td>
-                  <td class="h-px w-2/6 min-w-[15rem] lg:w-64">
+                  <td class="w-2/7 h-px min-w-[15rem] lg:w-64">
                     <div class="px-6 py-3">
                       <span
                         class="taskDescription line-clamp-3 font-poppins text-dark hover:text-dark/80 md:line-clamp-4"
@@ -645,7 +634,7 @@
                       </span>
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span
                         class="taskCategory font-poppins text-dark hover:text-dark/80"
@@ -654,28 +643,28 @@
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span class="font-poppins text-dark hover:text-dark/80"
                         >{{$val.CreatedAt | formatTime}}</span
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span class="font-poppins text-dark hover:text-dark/80"
                         >{{$val.Deadline | formatTime}}</span
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <span class="font-poppins text-dark hover:text-dark/80"
                         >{{$val.Status}}</span
                       >
                     </div>
                   </td>
-                  <td class="h-px w-1/6 whitespace-nowrap">
+                  <td class="w-1/7 h-px whitespace-nowrap">
                     <div class="px-6 py-3">
                       <div class="flex items-center gap-x-3">
                         <a
@@ -683,30 +672,99 @@
                           class="font-poppins text-primary hover:text-primary/80"
                           >Edit</a
                         >
-                        <form
-                          action="/client/dashboard/task-delete/process"
-                          method="post"
-                          class="-mt-0.5"
+                        <button
+                          type="button"
+                          class="font-poppins text-red-500 hover:text-red-500/80"
+                          data-hs-overlay="#delete-task-{{$val.ID}}"
                         >
-                          <input
-                            type="text"
-                            name="id"
-                            value="{{$val.ID}}"
-                            hidden
-                          />
-                          <button
-                            type="submit"
-                            class="font-poppins text-red-500 hover:text-red-500/80"
-                          >
-                            Hapus
-                          </button>
-                        </form>
+                          Hapus
+                        </button>
                       </div>
                     </div>
                   </td>
                 </tr>
                 {{end}}
                 <!-- end of check deadline -->
+
+                <!-- delete task modal -->
+                <div
+                  id="delete-task-{{$val.ID}}"
+                  class="hs-overlay fixed start-0 top-0 z-[60] hidden h-full w-full overflow-y-auto overflow-x-hidden"
+                >
+                  <div
+                    class="m-3 mt-0 flex min-h-[calc(100%-3.5rem)] items-center opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg"
+                  >
+                    <div
+                      class="flex w-full flex-col rounded-xl border bg-white shadow-sm"
+                    >
+                      <div
+                        class="flex items-center justify-between border-b px-4 py-3"
+                      >
+                        <h3 class="font-poppins font-bold text-gray-800">
+                          Hapus Tugas
+                        </h3>
+                        <button
+                          type="button"
+                          class="flex h-7 w-7 items-center justify-center rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100"
+                          data-hs-overlay="#delete-task-{{$val.ID}}"
+                        >
+                          <span class="sr-only">Close</span>
+                          <svg
+                            class="h-4 w-4 flex-shrink-0"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="overflow-y-auto">
+                        <p class="p-4 font-poppins text-gray-800">
+                          Hapus Tugas {{$val.Title}}?
+                        </p>
+                        <div
+                          class="flex items-center justify-end gap-x-2 border-t px-4 py-3"
+                        >
+                          <button
+                            type="button"
+                            class="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50"
+                            data-hs-overlay="#delete-task-{{$val.ID}}"
+                          >
+                            Batal
+                          </button>
+
+                          <form
+                            id="delete-task-{{$val.ID}}"
+                            action="/client/dashboard/task-delete/process"
+                            method="post"
+                          >
+                            <input
+                              type="text"
+                              name="id"
+                              value="{{$val.ID}}"
+                              hidden
+                            />
+                            <button
+                              type="submit"
+                              class="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700"
+                            >
+                              Hapus
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end of delete task modal -->
                 {{end}}
                 <!-- end of task table rows -->
               </tbody>

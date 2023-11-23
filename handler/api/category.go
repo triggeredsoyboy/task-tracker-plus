@@ -53,8 +53,8 @@ func (a *categoryAPI) CreateCategory(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{
-		"message": "task created",
-		"data": reqBody,
+		"message": "category created",
+		"data":    reqBody,
 	})
 }
 

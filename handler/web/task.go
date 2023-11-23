@@ -269,7 +269,7 @@ func (t *taskWeb) TaskUpdateProcess(c *gin.Context) {
 	}
 
 	if status == 200 {
-		c.Redirect(http.StatusSeeOther, "/client/task")
+		c.Redirect(http.StatusSeeOther, "/client/task?status=success&message=Tugas berhasil diperbarui!")
 	} else {
 		c.Redirect(http.StatusSeeOther, "/client/task?status=error&message="+err.Error())
 	}

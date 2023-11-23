@@ -18,6 +18,7 @@ type CategoryWeb interface {
 	CategoryPage(c *gin.Context)
 	CategoryAddProcess(c *gin.Context)
 	CategoryUpdateProcess(c *gin.Context)
+	CategoryDeleteProcess(c *gin.Context)
 }
 
 type categoryWeb struct {
@@ -167,7 +168,7 @@ func (cat *categoryWeb) CategoryAddProcess(c *gin.Context) {
 	if status == 201 {
 		c.Redirect(http.StatusSeeOther, "/client/category?status=success&message=Berhasil membuat kategori!")
 	} else {
-		c.Redirect(http.StatusSeeOther, "/client/dashboard?status=error&message+"+err.Error())
+		c.Redirect(http.StatusSeeOther, "/client/category?status=error&message+Gagal membuat kategori baru :(")
 	}
 }
 
@@ -222,6 +223,44 @@ func (cat *categoryWeb) CategoryUpdateProcess(c *gin.Context) {
 	if status == 200 {
 		c.Redirect(http.StatusSeeOther, "/client/category?status=success&message=Berhasil mengubah kategori!")
 	} else {
-		c.Redirect(http.StatusSeeOther, "/client/dashboard?status=error&message+"+err.Error())
+		c.Redirect(http.StatusSeeOther, "/client/category?status=error&message=Gagal mengubah kategori :(")
+	}
+}
+
+func (cat *categoryWeb) CategoryDeleteProcess(c *gin.Context) {
+	// extracting email from context
+	var email string
+	if data, ok := c.Get("email"); ok {
+		if contextData, ok := data.(string); ok {
+			email = contextData
+		}
+	}
+
+	// get session by email
+	session, err := cat.sessionService.GetSessionByEmail(email)
+	if err != nil {
+		c.Redirect(http.StatusSeeOther, "/client/category?status=error&message="+err.Error())
+		return
+	}
+
+	// extracting category id from form value
+	categoryID, err := strconv.Atoi(c.Request.FormValue("id"))
+	if err != nil {
+		c.Redirect(http.StatusSeeOther, "/client/category?status=error&message=Kategori tidak ditemukan!")
+		return
+	}
+
+	// delete category
+	status, err := cat.categoryClient.DeleteCategory(session.Token, categoryID)
+	if err != nil {
+		c.Redirect(http.StatusSeeOther, "/client/category?status=error&message="+err.Error())
+		return
+	}
+
+	if status == 200 {
+		c.Redirect(http.StatusSeeOther, "/client/category?status=success&message=Berhasil menghapus kategori!")
+	} else {
+		c.Redirect(http.StatusSeeOther, "/client/category?status=error&message=Kategori gagal dihapus :(")
+		return
 	}
 }

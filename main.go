@@ -205,6 +205,7 @@ func RunClient(db *gorm.DB, gin *gin.Engine, embed embed.FS) *gin.Engine {
 		main.GET("/category", client.CategoryWeb.CategoryPage)
 		main.POST("/category/category-add/process", client.CategoryWeb.CategoryAddProcess)
 		main.POST("/category/category-update/:id/process", client.CategoryWeb.CategoryUpdateProcess)
+		main.POST("/category/category-delete/process", client.CategoryWeb.CategoryDeleteProcess)
 	}
 
 	return gin
