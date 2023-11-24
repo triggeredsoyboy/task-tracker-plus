@@ -598,6 +598,38 @@
                 <!-- end of empty state -->
 
                 {{range $index, $task := $val.Tasks}}
+                <!-- check deadline -->
+                {{if checkDeadline $task.Status $task.Deadline}}
+                <!-- over the deadline task -->
+                <a
+                  href="/client/task/{{$task.ID}}"
+                  class="flex flex-col justify-between rounded-lg border bg-red-100 p-4 shadow-sm hover:bg-red-200"
+                >
+                  <p
+                    class="font-poppins text-lg font-bold leading-8 tracking-wide text-red-500 hover:text-red-500/80"
+                  >
+                    {{$task.Title}}
+                  </p>
+                  <p
+                    class="line-clamp-4 font-poppins text-sm leading-[22px] text-red-500 hover:text-red-500/80"
+                  >
+                    {{$task.Description}}
+                  </p>
+                  <div
+                    class="mt-2 flex flex-wrap items-center justify-between border-t border-red-500 pt-2"
+                  >
+                    <span
+                      class="font-poppins text-base text-red-500 hover:text-red-500/80"
+                      >{{$val.Name}}</span
+                    >
+                    <span
+                      class="font-poppins text-sm text-red-500 hover:text-red-500/80"
+                      >{{$task.Deadline | formatTime}}</span
+                    >
+                  </div>
+                </a>
+                {{else}}
+                <!-- didn't over the deadline task -->
                 <a
                   href="/client/task/{{$task.ID}}"
                   class="flex flex-col justify-between rounded-lg border bg-white p-4 shadow-sm hover:bg-gray-50"
@@ -621,6 +653,8 @@
                     >
                   </div>
                 </a>
+                {{end}}
+                <!-- end of check deadline -->
                 {{end}}
               </div>
               <!-- end of tasks list -->
@@ -847,6 +881,38 @@
                 <!-- end of empty state -->
 
                 {{range $index, $task := $val.Tasks}}
+                <!-- check deadline -->
+                {{if checkDeadline $task.Status $task.Deadline}}
+                <!-- over the deadline task -->
+                <a
+                  href="/client/task/{{$task.ID}}"
+                  class="flex flex-col justify-between rounded-lg border bg-red-100 p-4 shadow-sm hover:bg-red-200"
+                >
+                  <p
+                    class="font-poppins text-lg font-bold leading-8 tracking-wide text-red-500 hover:text-red-500/80"
+                  >
+                    {{$task.Title}}
+                  </p>
+                  <p
+                    class="line-clamp-4 font-poppins text-sm leading-[22px] text-red-500 hover:text-red-500/80"
+                  >
+                    {{$task.Description}}
+                  </p>
+                  <div
+                    class="mt-2 flex flex-wrap items-center justify-between border-t border-red-500 pt-2"
+                  >
+                    <span
+                      class="font-poppins text-base text-red-500 hover:text-red-500/80"
+                      >{{$val.Name}}</span
+                    >
+                    <span
+                      class="font-poppins text-sm text-red-500 hover:text-red-500/80"
+                      >{{$task.Deadline | formatTime}}</span
+                    >
+                  </div>
+                </a>
+                {{else}}
+                <!-- didn't over the deadline task -->
                 <a
                   href="/client/task/{{$task.ID}}"
                   class="flex flex-col justify-between rounded-lg border bg-white p-4 shadow-sm hover:bg-gray-50"
@@ -870,6 +936,8 @@
                     >
                   </div>
                 </a>
+                {{end}}
+                <!-- end of check deadline -->
                 {{end}}
               </div>
               <!-- end of tasks list -->
